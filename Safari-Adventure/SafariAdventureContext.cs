@@ -25,5 +25,9 @@ namespace Safari_Adventure
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     { }
+
+    //public DbSet<SchemaClass> TableName {get;set;}
+    public DbSet<SeenAnimals> SeenAnimals { get; set; }
+
   }
 }

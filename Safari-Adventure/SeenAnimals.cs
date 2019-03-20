@@ -1,6 +1,6 @@
 namespace Safari_Adventure
 {
-  public class Table
+  public class SeenAnimals
   {
     //Id / id (int)
     public int Id { get; set; }
