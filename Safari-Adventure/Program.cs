@@ -17,6 +17,7 @@ namespace Safari_Adventure
         CountOfTimesSeen = 33,
         LocationOfLastSeen = "Jungle",
       };
+
       db.SeenAnimals.Add(Animal);
       db.SaveChanges();
 
