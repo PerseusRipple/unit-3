@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Safari_Adventure
 {
@@ -61,7 +62,7 @@ namespace Safari_Adventure
       };
 
 
-      //   db.SeenAnimals.Add(Animal);
+      db.SeenAnimals.Add(Animal);
       db.SeenAnimals.Add(Animal2);
       db.SeenAnimals.Add(Animal3);
       db.SeenAnimals.Add(Animal4);
@@ -73,9 +74,16 @@ namespace Safari_Adventure
 
       //create (insert)
       //select
+      //SELECT * FROM Animal WHERE LocationOfLastSeen = 'Jungle' OR LoLs = 'Desert'
+      var sightedAnimals = db.SeenAnimals.Where(animals => animals.LocationOfLastSeen == "Jungle" || animals.LocationOfLastSeen == "Desert");
+
+      foreach (var animals in sightedAnimals)
+
       //update
       //delete
-
+      {
+        Console.WriteLine(animals.LocationOfLastSeen + ", " + animals.LocationOfLastSeen);
+      }
 
     }
   }
