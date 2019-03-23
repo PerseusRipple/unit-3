@@ -78,12 +78,22 @@ namespace Safari_Adventure
       var sightedAnimals = db.SeenAnimals.Where(animals => animals.LocationOfLastSeen == "Jungle" || animals.LocationOfLastSeen == "Desert");
 
       foreach (var animals in sightedAnimals)
-
-      //update
-      //delete
       {
         Console.WriteLine(animals.LocationOfLastSeen + ", " + animals.LocationOfLastSeen);
       }
+
+      // update
+      // find the item we want to update
+      //if nothing found then return null
+      var Gorilla = db.SeenAnimals.FirstOrDefault(animals => animals.Species == "Gorilla");
+      // update it
+      if (Gorilla != null)
+      {
+        Gorilla.CountOfTimesSeen = 31;
+      }
+      // save the changes 
+      db.SaveChanges();
+      //delete
 
     }
   }
