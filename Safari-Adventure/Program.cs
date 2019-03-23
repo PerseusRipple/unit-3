@@ -79,7 +79,7 @@ namespace Safari_Adventure
 
       foreach (var animals in sightedAnimals)
       {
-        Console.WriteLine(animals.LocationOfLastSeen + ", " + animals.LocationOfLastSeen);
+        Console.WriteLine(animals.LocationOfLastSeen + " " + animals.LocationOfLastSeen);
       }
 
       // update
@@ -90,6 +90,7 @@ namespace Safari_Adventure
       if (Gorilla != null)
       {
         Gorilla.CountOfTimesSeen = 31;
+        Gorilla.LocationOfLastSeen = "Desert";
       }
       // save the changes 
       db.SaveChanges();
