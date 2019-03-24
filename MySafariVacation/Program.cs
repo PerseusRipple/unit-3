@@ -82,10 +82,10 @@ namespace MySafariVacation
 
       }
 
-      // update
-      // find the item we want to update
-      //SELECT * FROM ANIMALS WHERE Species = 'Gorilla'
-      //if nothing found then return null
+      //   // update
+      //   // find the item we want to update
+      //   //SELECT * FROM ANIMALS WHERE Species = 'Gorilla'
+      //   //if nothing found then return null
       var gorilla = db.Animals.FirstOrDefault(seenAnimals => seenAnimals.Species == "Gorilla");
       // update it
       if (gorilla != null)
@@ -93,10 +93,10 @@ namespace MySafariVacation
         gorilla.CountOfTimesSeen = 31;
         gorilla.LocationOfLastSeen = "Desert";
       }
-      // save the changes 
+      //   // save the changes 
       db.SaveChanges();
 
-      //SELECT * FROM Animals WHERE LoLs = "Jungle"
+      //   //SELECT * FROM Animals WHERE LoLs = "Jungle"
       var jungleAnimals = db.Animals.Where(seenAnimals => seenAnimals.LocationOfLastSeen == "Jungle");
 
       foreach (var seenAnimals in jungleAnimals)
@@ -106,7 +106,7 @@ namespace MySafariVacation
       //delete
       //DELETE FROM ANIMALS WHERE LoLs = "Desert"
       //find the thing to delete
-      var desertAnimals = db.Animals.FirstOrDefault(SeenAnimals => SeenAnimals.LocationOfLastSeen == "Desert");
+      var desertAnimals = db.Animals.FirstOrDefault(seenAnimals => seenAnimals.LocationOfLastSeen == "Desert");
       if (desertAnimals != null)
       {
         //delete it
@@ -114,9 +114,36 @@ namespace MySafariVacation
       }
       //save the changes
       db.SaveChanges();
-    }
 
+      // Add all the CountOfTimesSeen and get a total number of animals seen
+      // ADD FROM Animals WHERE CoTs = ...
+      var totalSpottings = db.Animals.Where(seenAnimals => seenAnimals.CountOfTimesSeen == 33 && seenAnimals.CountOfTimesSeen == 24 && seenAnimals.CountOfTimesSeen == 18);
+
+      foreach (var seenAnimals in totalSpottings)
+      {
+        Console.WriteLine("I've seen" + " " + seenAnimals.CountOfTimesSeen);
+      }
+      db.SaveChanges();
+
+      //Get the CountOfTimesSeen of lions, tigers and bears
+      //this is redundant since desert animals were deleted
+      //but since my gorilla seems to be lingering...
+
+      var jungleSightings = db.Animals.Where(seenAnimals => seenAnimals.LocationOfLastSeen == "Jungle");
+
+      foreach (var seenAnimals in jungleSightings)
+      {
+        Console.WriteLine(seenAnimals.Species + " " + seenAnimals.CountOfTimesSeen);
+      }
+      db.SaveChanges();
+
+
+    }
   }
 }
+
+
+
+
 
 
