@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace MySafariVacation
 {
@@ -7,8 +8,9 @@ namespace MySafariVacation
     static void Main(string[] args)
     {
       Console.WriteLine("Let's See Some Animals!");
+      //CREATE (insert)
       //we need to create a new instance of our database context class
-      var db = new SafariAdventureContext();
+      var db = new MySafariVacationContext();
 
       var Animal = new SeenAnimals
       {
@@ -58,15 +60,63 @@ namespace MySafariVacation
         CountOfTimesSeen = 8,
         LocationOfLastSeen = "Desert",
       };
-      db.SeenAnimals.Add(Animal);
-      db.SeenAnimals.Add(Animal2);
-      db.SeenAnimals.Add(Animal3);
-      db.SeenAnimals.Add(Animal4);
-      db.SeenAnimals.Add(Animal5);
-      db.SeenAnimals.Add(Animal6);
-      db.SeenAnimals.Add(Animal7);
-      db.SeenAnimals.Add(Animal8);
+
+      //   db.Animals.Add(Animal);
+      //   db.Animals.Add(Animal2);
+      //   db.Animals.Add(Animal3);
+      //   db.Animals.Add(Animal4);
+      //   db.Animals.Add(Animal5);
+      //   db.Animals.Add(Animal6);
+      //   db.Animals.Add(Animal7);
+      //   db.Animals.Add(Animal8);
+      db.SaveChanges();
+
+      //select
+      //SELECT * FROM Animals all animals user has seen
+      //SELECT * FROM Animals WHERE LoLs == "Jungle" or LoLs == "Desert"
+      var sightedAnimals = db.Animals.Where(seenAnimals => seenAnimals.LocationOfLastSeen == "Jungle" || seenAnimals.LocationOfLastSeen == "Desert");
+
+      foreach (var seenAnimals in sightedAnimals)
+      {
+        Console.WriteLine(seenAnimals.Species + " " + seenAnimals.LocationOfLastSeen);
+
+      }
+
+      // update
+      // find the item we want to update
+      //SELECT * FROM ANIMALS WHERE Species = 'Gorilla'
+      //if nothing found then return null
+      var gorilla = db.Animals.FirstOrDefault(seenAnimals => seenAnimals.Species == "Gorilla");
+      // update it
+      if (gorilla != null)
+      {
+        gorilla.CountOfTimesSeen = 31;
+        gorilla.LocationOfLastSeen = "Desert";
+      }
+      // save the changes 
+      db.SaveChanges();
+
+      //SELECT * FROM Animals WHERE LoLs = "Jungle"
+      var jungleAnimals = db.Animals.Where(seenAnimals => seenAnimals.LocationOfLastSeen == "Jungle");
+
+      foreach (var seenAnimals in jungleAnimals)
+      {
+        Console.WriteLine(seenAnimals.Species + " " + seenAnimals.LocationOfLastSeen);
+      }
+      //delete
+      //DELETE FROM ANIMALS WHERE LoLs = "Desert"
+      //find the thing to delete
+      var desertAnimals = db.Animals.FirstOrDefault(SeenAnimals => SeenAnimals.LocationOfLastSeen == "Desert");
+      if (desertAnimals != null)
+      {
+        //delete it
+        db.Animals.Remove(desertAnimals);
+      }
+      //save the changes
       db.SaveChanges();
     }
+
   }
 }
+
+
