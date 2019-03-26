@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using SafariApi.Controllers.Models;
 
 namespace safariapi
 {
@@ -43,5 +44,7 @@ namespace safariapi
     {
       modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
     }
+
+    public DbSet<Animal> Animals { get; set; }
   }
 }
