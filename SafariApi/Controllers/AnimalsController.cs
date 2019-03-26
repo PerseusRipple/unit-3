@@ -21,8 +21,18 @@ namespace safariapi.Controllers
       var results = db.Animals.OrderBy(o => o.Species).ToList();
       return results;
     }
+    //return lions
+    [HttpGet("species/{species}")]
+    public ActionResult<IList<Animal>> GetOneAnimal(string species)
+    {
+      var db = new DatabaseContext();
+      var animal = db.Animals.Where(f => f.Species.Contains(species));
+      return animal.ToList();
+    }
+
+
     //   return new List<Animal> { new Animal { Species = "Lion" }, new Animal { Species = "Tiger" }, new Animal { Species = "Bear" } };
-    // }
+    //  }
 
     [HttpGet("{id}")]
 
