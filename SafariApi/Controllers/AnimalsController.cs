@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using SafariApi.Controllers.Models;
+
 using System.Linq;
 
 namespace safariapi.Controllers
@@ -10,6 +11,12 @@ namespace safariapi.Controllers
   [ApiController]
   public class AnimalsController : ControllerBase
   {
+    private DatabaseContext db;
+
+    public AnimalsController()
+    {
+      this.db = new DatabaseContext();
+    }
 
     [HttpGet]
 
@@ -29,6 +36,14 @@ namespace safariapi.Controllers
       var animal = db.Animals.Where(f => f.Species.Contains(species));
       return animal.ToList();
     }
+    // //return jungle animals
+    // [HttpGet("locationOfLastSeen/{jungle}")]
+
+    // public ActionResult<IList<Animal>> GetJungleAnimal(string locationOfLastSeen)
+    // {
+    //   var db = new DatabaseContext();
+    //   var animal = db.Animals.Where(f=> f.LocationOfLastSeen.Contains(locationOfLastSeen));
+    // }
 
 
     //   return new List<Animal> { new Animal { Species = "Lion" }, new Animal { Species = "Tiger" }, new Animal { Species = "Bear" } };
@@ -58,6 +73,20 @@ namespace safariapi.Controllers
       db.SaveChanges();
       return animalToAdd;
     }
+
+    //PUT
+    [HttpPut("{id")]
+    public ActionResult<Animal> UpdateAnimal(int id, [FromBody] Animal newAnimalData)
+    {
+      var animal = db.Animals.FirstOrDefault(f => f.Id == id);
+      animal.Species = newAnimalData.Species;
+      animal.CountOfTimesSeen = newAnimalData.CountOfTimesSeen;
+      animal.LocationOfLastSeen = newAnimalData.LocationOfLastSeen;
+      db.SaveChanges();
+      return animal;
+    }
+    //DELETE
+
   }
 }
 
