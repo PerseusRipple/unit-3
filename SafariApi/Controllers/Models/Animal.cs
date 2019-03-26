@@ -1,3 +1,9 @@
+using System;
+using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+
+
 namespace SafariApi.Controllers.Models
 {
   public class Animal
