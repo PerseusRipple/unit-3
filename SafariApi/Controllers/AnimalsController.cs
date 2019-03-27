@@ -48,18 +48,15 @@ namespace safariapi.Controllers
       var animal = db.Animals.Where(f => f.Species.Contains(species));
       return animal.ToList();
     }
-    // //return jungle animals
-    // [HttpGet("locationOfLastSeen/{jungle}")]
+    //return jungle animals
+    [HttpGet("locationOfLastSeen/{location}")]
 
-    // public ActionResult<IList<Animal>> GetJungleAnimal(string locationOfLastSeen)
-    // {
-    //   var db = new DatabaseContext();
-    //   var animal = db.Animals.Where(f=> f.LocationOfLastSeen.Contains(locationOfLastSeen));
-    // }
-
-
-    //   return new List<Animal> { new Animal { Species = "Lion" }, new Animal { Species = "Tiger" }, new Animal { Species = "Bear" } };
-    //  }
+    public ActionResult<IList<Animal>> GetJungleAnimal(string location)
+    {
+      var db = new DatabaseContext();
+      var animal = db.Animals.Where(f => f.LocationOfLastSeen.Contains(location));
+      return animal.ToList();
+    }
 
     [HttpGet("{id}")]
 
@@ -79,7 +76,6 @@ namespace safariapi.Controllers
     [HttpPost]
     public ActionResult<Animal> CreateAnimal([FromBody] Animal animalToAdd)
     {
-
       var db = new DatabaseContext();
       db.Animals.Add(animalToAdd);
       db.SaveChanges();
@@ -98,14 +94,16 @@ namespace safariapi.Controllers
       return animal;
     }
     //PUT
-    //PUT/Animal/{id} that adds 1 to the CoTs (given by id)
-    // [HttpPut("{id}")]
+    // PUT/Animal/{id} that adds 1 to the CoTs (given by id)
+    [HttpPut("{id}/count")]
+    public ActionResult<Animal> UpdateAnimalCount(int id)
+    {
+      var animal = db.Animals.FirstOrDefault(f => f.Id == id);
+      animal.CountOfTimesSeen++;
+      db.SaveChanges();
+      return animal;
 
-    // public ActionResult<Animal> UpdateAnimal(int id, [FromBody] Animal newAnimalData)
-    // {
-    //   var animal = db.Animals.FirstOrDefault(f=> f.Id == id);
-    //   animal.CountOfTimesSeen = newAnimal
-    // }
+    }
 
 
     //DELETE
