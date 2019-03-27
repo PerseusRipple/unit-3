@@ -75,7 +75,7 @@ namespace safariapi.Controllers
     }
 
     //PUT
-    [HttpPut("{id")]
+    [HttpPut("{id}")]
     public ActionResult<Animal> UpdateAnimal(int id, [FromBody] Animal newAnimalData)
     {
       var animal = db.Animals.FirstOrDefault(f => f.Id == id);
@@ -85,7 +85,35 @@ namespace safariapi.Controllers
       db.SaveChanges();
       return animal;
     }
+    //PUT
+    //PUT/Animal/{id} that adds 1 to the CoTs (given by id)
+    // [HttpPut("{id}")]
+
+    // public ActionResult<Animal> UpdateAnimal(int id, [FromBody] Animal newAnimalData)
+    // {
+    //   var animal = db.Animals.FirstOrDefault(f=> f.Id == id);
+    //   animal.CountOfTimesSeen = newAnimal
+    // }
+
+
     //DELETE
+    [HttpDelete("{id}")]
+    public ActionResult DeleteAnimal(int id)
+    {
+
+      //update that boolean
+      //soft delete
+      var animal = db.Animals.FirstOrDefault(f => f.Id == id);
+      animal.IsActive = false;
+      db.SaveChanges();
+      return Ok();
+
+      //hard deletion 
+      // var animal = db.Animals.FirstOrDefault(f => f.Id == id);
+      // db.Animals.Remove(animal);
+      // db.SaveChanges();
+      // return Ok();
+    }
 
   }
 }

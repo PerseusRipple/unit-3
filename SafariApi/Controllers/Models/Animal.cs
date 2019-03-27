@@ -16,5 +16,7 @@ namespace SafariApi.Controllers.Models
     public int CountOfTimesSeen { get; set; }
 
     public string LocationOfLastSeen { get; set; }
+
+    public bool IsActive { get; set; } = true;
   }
 }
