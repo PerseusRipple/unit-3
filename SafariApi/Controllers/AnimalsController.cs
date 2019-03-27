@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using SafariApi.Controllers.Models;
 
+
 using System.Linq;
 
 namespace safariapi.Controllers
@@ -20,12 +21,23 @@ namespace safariapi.Controllers
 
     [HttpGet]
 
-    public ActionResult<IList<Animal>> GetAllAnimals()
+    public ActionResult<IList<AnimalViewModel>> GetAllAnimals()
     {
       //TODO: query the database
       // return the results
-      var db = new DatabaseContext();
-      var results = db.Animals.OrderBy(o => o.Species).ToList();
+      // var db = new DatabaseContext();
+      var results = db
+             .Animals
+             .Where(w => w.IsActive)
+             .OrderBy(o => o.Species)
+             .Select(s => new AnimalViewModel
+             {
+               Species = s.Species,
+               CountOfTimesSeen = s.CountOfTimesSeen,
+               LocationOfLastSeen = s.LocationOfLastSeen,
+               Id = s.Id
+             })
+             .ToList();
       return results;
     }
     //return lions

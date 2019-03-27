@@ -1,3 +1,5 @@
+
+
 namespace SafariApi.Controllers.Models
 {
   public class AnimalViewModel
