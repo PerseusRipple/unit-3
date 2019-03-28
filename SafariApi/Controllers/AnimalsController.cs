@@ -48,13 +48,13 @@ namespace safariapi.Controllers
       var animal = db.Animals.Where(f => f.Species.Contains(species));
       return animal.ToList();
     }
-    //return jungle animals
-    [HttpGet("locationOfLastSeen/{location}")]
+    //return animal location
+    [HttpGet("location/{location}")]
 
-    public ActionResult<IList<Animal>> GetJungleAnimal(string location)
+    public ActionResult<IList<Animal>> GetAnimalLocation(string location)
     {
       var db = new DatabaseContext();
-      var animal = db.Animals.Where(f => f.LocationOfLastSeen.Contains(location));
+      var animal = db.Animals.Where(f => f.LocationOfLastSeen.ToLower().Contains(location.ToLower()));
       return animal.ToList();
     }
 
@@ -105,7 +105,6 @@ namespace safariapi.Controllers
 
     }
 
-
     //DELETE
     [HttpDelete("{id}")]
     public ActionResult DeleteAnimal(int id)
@@ -124,6 +123,9 @@ namespace safariapi.Controllers
       // db.SaveChanges();
       // return Ok();
     }
+    //GET SUM of ALL CoTs
+
+
 
   }
 }
