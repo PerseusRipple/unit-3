@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 
 namespace WritersWorld.Models
@@ -7,15 +8,15 @@ namespace WritersWorld.Models
 
     public int Id { get; set; }
     public string Name { get; set; }
-    public string DateOfBirth { get; set; }
-    public string DateOfDeath { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public DateTime? DateOfDeath { get; set; }
     public int NumberOfBooks { get; set; }
     public bool IsWinner { get; set; } = false;
 
 
     // navigation support
-    public int BookId { get; set; }
-    public Book Book { get; set; }
+    public List<Book> Books { get; set; } = new List<Book>();
+
 
   }
 }

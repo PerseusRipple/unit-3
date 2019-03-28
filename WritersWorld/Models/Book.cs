@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 
 namespace WritersWorld.Models
 {
@@ -7,14 +7,12 @@ namespace WritersWorld.Models
     public int Id { get; set; }
     public string Genre { get; set; }
     public string Title { get; set; }
-    public string DateOfPublication { get; set; }
+    public DateTime DateOfPublication { get; set; }
     public string PublicationHouse { get; set; }
 
-    //Navigation 
-    public List<Author> Authors { get; set; } = new List<Author>();
-
-
-
+    //Navigation support
+    public int AuthorId { get; set; }
+    public Author Author { get; set; }
 
   }
 }
