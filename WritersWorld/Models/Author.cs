@@ -8,7 +8,7 @@ namespace WritersWorld.Models
 
     public int Id { get; set; }
     public string Name { get; set; }
-    public DateTime DateOfBirth { get; set; }
+    public DateTime? DateOfBirth { get; set; } = null;
     public DateTime? DateOfDeath { get; set; } = null;
     public int NumberOfBooks { get; set; }
     public bool IsWinner { get; set; } = false;
