@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WritersWorld.Models;
-using WritersWorldAPI.Controllers.Models;
+
+
 
 namespace writersworld.Controllers
 {
@@ -20,7 +21,7 @@ namespace writersworld.Controllers
 
     [HttpGet]
 
-    public ActionResult<IList<AuthorViewModel>> GetAllAuthors()
+    public ActionResult<IList<Author>> GetAllAuthors()
     {
       //TODO: query the database
       // return the results
@@ -29,7 +30,7 @@ namespace writersworld.Controllers
              .Authors
              .Where(w => w.IsWinner)
              .OrderBy(o => o.Name)
-             .Select(s => new AuthorViewModel
+             .Select(s => new Author
              {
                Name = s.Name,
                DateOfBirth = s.DateOfBirth,
@@ -39,16 +40,6 @@ namespace writersworld.Controllers
              })
              .ToList();
       return results;
-    }
-
-
-
-    [HttpGet]
-    public ActionResult<IList<Author>> GetAllAuthors()
-    {
-      return db.Authors.OrderBy(o => o.Name).ToList();
-
-
     }
   }
 }
