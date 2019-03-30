@@ -3,40 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using writersworld;
 using WritersWorld.Models;
 
-
-
-namespace writersworld.Controllers
+namespace WritersWorld.Controllers
 {
+
   [Route("api/[controller]")]
   [ApiController]
-  public class AuthorsController : ControllerBase
+  public class BooksController : ControllerBase
   {
     private DatabaseContext db;
-    public AuthorsController()
+    public BooksController()
     {
       this.db = new DatabaseContext();
     }
 
     [HttpGet]
 
-    public ActionResult<IList<Author>> GetAllAuthors()
+    public ActionResult<IList<Book>> GetAllBooks()
     {
       //TODO: query the database
       // return the results
       // var db = new DatabaseContext();
       var results = db
-             .Authors
-             .Where(w => w.IsWinner)
-             .OrderBy(o => o.Name)
-             .Select(s => new Author
+             .Books
+             .Where(w => w.IsInPrint)
+             .OrderBy(o => o.Title)
+             .Select(s => new Book
              {
-               Name = s.Name,
-               DateOfBirth = s.DateOfBirth,
-               DateOfDeath = s.DateOfDeath,
-               NumberOfBooks = s.NumberOfBooks,
-               IsWinner = s.IsWinner,
+               Genre = s.Genre,
+               Title = s.Title,
+               DateOfPublication = s.DateOfPublication,
+               PublicationHouse = s.PublicationHouse,
+               IsInPrint = s.IsInPrint,
                Id = s.Id
              })
              .ToList();
@@ -44,3 +44,4 @@ namespace writersworld.Controllers
     }
   }
 }
+
